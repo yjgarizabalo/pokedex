@@ -1,20 +1,78 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+
+// ICONS
+import { AntDesign } from '@expo/vector-icons';
+
+
+// NAVEGATIONS
+import { NavigationContainer } from '@react-navigation/native'
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
+
+// VARIABLES
+const Tab = createMaterialBottomTabNavigator();
+
+
+// COMPONENTES
+import Home from './components/views/Home'
+import About from './components/views/About'
+import Blog from './components/views/Blog'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator bordered={true} barStyle={{ backgroundColor: '#512E5F', bottom: 25, marginLeft: 20, marginRight: 20 }}>
+        <Tab.Screen name="Home" component={HomeScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <AntDesign name="home" size={24} color={color} />
+            )
+          }}
+        />
+        <Tab.Screen name="About" component={AboutScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <AntDesign name="infocirlceo" size={24} color={color} />
+            )
+          }}
+        />
+        <Tab.Screen name="Blog" component={BlogScreen}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="book" size={24} color={color} />
+            )
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
+
+//SCREENS
+function HomeScreen() {
+  return (
+    <Home />
+  );
+}
+
+function AboutScreen() {
+  return (
+    <About />
+  );
+}
+
+function BlogScreen() {
+  return (
+    <Blog />
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  NavContainer: {
+    position: 'absolute',
     alignItems: 'center',
-    justifyContent: 'center',
+
+    bottom: 20,
   },
 });

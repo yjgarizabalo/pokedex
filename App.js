@@ -21,7 +21,7 @@ import Blog from './components/views/Blog'
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator labeled={false} bordered={true} barStyle={{ backgroundColor: '#512E5F', bottom: 25, marginLeft: 20, marginRight: 20 }}>
+      <Tab.Navigator labeled={false} bordered={true} barStyle={{ backgroundColor: '#FFD700', bottom: 25, marginLeft: 20, marginRight: 20 }}>
 
         <Tab.Screen name="Home_"
           options={{

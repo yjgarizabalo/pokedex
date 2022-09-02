@@ -5,52 +5,65 @@ import { AntDesign } from '@expo/vector-icons';
 
 // NAVEGATIONS
 import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+
 
 // VARIABLES
 const Tab = createMaterialBottomTabNavigator();
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 // COMPONENTES
 import Home from './components/views/Home'
 import About from './components/views/About'
 import Blog from './components/views/Blog'
 
-// HEADER STACKS
-function HomeStackScreen() {
-  return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={HomeScreen} />
-    </HomeStack.Navigator>
-  );
-}
-
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator bordered={true} barStyle={{ backgroundColor: '#512E5F', bottom: 25, marginLeft: 20, marginRight: 20 }}>
-        <Tab.Screen name="Home" component={HomeStackScreen}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <AntDesign name="home" size={24} color={color} />
-            )
-          }}
-        />
-        <Tab.Screen name="About" component={AboutScreen}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <AntDesign name="infocirlceo" size={24} color={color} />
-            )
-          }}
-        />
-        <Tab.Screen name="Blog" component={BlogScreen}
+      <Tab.Navigator labeled={false} bordered={true} barStyle={{ backgroundColor: '#512E5F', bottom: 25, marginLeft: 20, marginRight: 20 }}>
+
+        <Tab.Screen name="Home_"
           options={{
             tabBarIcon: ({ color }) => (
-              <AntDesign name="book" size={24} color={color} />
+              <AntDesign name="home" size={20} color={color} />
             )
           }}
-        />
+        >
+          {() => (
+            <Stack.Navigator>
+              <Stack.Screen name="Pokemones" component={HomeScreen} />
+            </Stack.Navigator>
+          )}
+        </Tab.Screen>
+
+        <Tab.Screen name="About_"
+          options={{
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="infocirlceo" size={20} color={color} />
+            )
+          }}
+        >
+          {() => (
+            <Stack.Navigator>
+              <Stack.Screen name="Informacion" component={AboutScreen} />
+            </Stack.Navigator>
+          )}
+        </Tab.Screen>
+
+        <Tab.Screen name="Blog_"
+          options={{
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="book" size={20} color={color} />
+            )
+          }}
+        >
+          {() => (
+            <Stack.Navigator>
+              <Stack.Screen name="Pokebola" component={BlogScreen} />
+            </Stack.Navigator>
+          )}
+        </Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -77,9 +90,10 @@ function BlogScreen() {
 }
 
 const styles = StyleSheet.create({
-  NavContainer: {
-    position: 'absolute',
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
     alignItems: 'center',
-    bottom: 20,
+    justifyContent: 'center',
   },
 });

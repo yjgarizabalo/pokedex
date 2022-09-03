@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, SectionList, StatusBar } from 'react-native';
 
-
-
 const Item = ({ title }) => (
     <View style={styles.item}>
         <Text style={styles.title}>{title}</Text>
@@ -15,34 +13,32 @@ const Pokemones = () => {
     const [info, setInfo] = useState([]);
 
     useEffect(() => {
+        fetchData();
+    }, []);
+ 
+    const fetchData = async () => {
         const options = {
             method: 'GET',
         };
+        try {
+            const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0', options);
+            const json = await response.json();
+            setInfo(json.results)
+            console.log(json);
+        } catch (error) {
+            console.log("error", error);
+        }
+    };
 
-        const fetchData = async () => {
-            try {
-                const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0', options);
-                const json = await response.json();
-                setInfo(json.results)
-                console.log(json);
-            } catch (error) {
-                console.log("error", error);
-            }
-        };
 
-        fetchData();
-    }, []);
-
-    let inf = [];
-    for (let r of info){
-        inf.push(<Text style={{ FontWeight: 'bold', fontSize: '25px', marginTop: '100'}}>{r.nombre}</Text>)
-    }
-
+    let i = 0;
     return (
-        
-
         <SafeAreaView style={styles.container}>
-        {inf}
+            {
+                info.map(({ name }) => (
+                    <Text key={i++} style={{ FontWeight: 'bold', fontSize: '25px', marginTop: '100'}}>{name}</Text>
+                ))
+            }
         </SafeAreaView>
     );
 }

@@ -21,9 +21,9 @@ const Pokemones = () => {
 
         const fetchData = async () => {
             try {
-                const response = await fetch('https://pokeapi.co/api/v2/pokemon/pikachu', options);
+                const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0', options);
                 const json = await response.json();
-                setInfo(json)
+                setInfo(json.results)
                 console.log(json);
             } catch (error) {
                 console.log("error", error);
@@ -33,9 +33,16 @@ const Pokemones = () => {
         fetchData();
     }, []);
 
+    let inf = [];
+    for (let r of info){
+        inf.push(<Text style={{ FontWeight: 'bold', fontSize: '25px', marginTop: '100'}}>{r.nombre}</Text>)
+    }
+
     return (
+        
+
         <SafeAreaView style={styles.container}>
-            <Text style={{ FontWeight: 'bold', fontSize: '25px', marginTop: '100'}}>{info.name}</Text>
+        {inf}
         </SafeAreaView>
     );
 }

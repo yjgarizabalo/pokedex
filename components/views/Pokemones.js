@@ -1,13 +1,6 @@
 // import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, SectionList, StatusBar } from 'react-native';
-
-const Item = ({ title }) => (
-    <View style={styles.item}>
-        <Text style={styles.title}>{title}</Text>
-    </View>
-);
-
+import { StyleSheet, Text, View, SafeAreaView, StatusBar, ScrollView } from 'react-native';
 
 const Pokemones = () => {
     const [info, setInfo] = useState([]);
@@ -15,13 +8,13 @@ const Pokemones = () => {
     useEffect(() => {
         fetchData();
     }, []);
- 
+
     const fetchData = async () => {
         const options = {
             method: 'GET',
         };
         try {
-            const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20&offset=0', options);
+            const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=24&offset=0', options);
             const json = await response.json();
             setInfo(json.results)
             console.log(json);
@@ -31,14 +24,21 @@ const Pokemones = () => {
     };
 
 
-    let i = 0;
+
     return (
         <SafeAreaView style={styles.container}>
-            {
-                info.map(({ name }) => (
-                    <Text key={i++} style={{ FontWeight: 'bold', fontSize: '25px', marginTop: '100'}}>{name}</Text>
-                ))
-            }
+            <ScrollView>
+                {
+                    info.map(({ name }) => {
+                        return (
+                            <View style={styles.item}>
+                                <Text style={styles.title}>Nombre</Text>
+                                <Text style={styles.name}>{name}</Text>
+                            </View>
+                        )
+                    })
+                }
+            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -54,14 +54,15 @@ const styles = StyleSheet.create({
         padding: 24,
         marginVertical: 8,
     },
-    header: {
-        fontSize: 18,
-        backgroundColor: '#fff',
-        fontWeight: 'bold',
-    },
     title: {
-        fontSize: 14,
+        fontSize: 12,
+        fontWeight: 'bold',
+        color: '#777777'
     },
+    name: {
+        fontSize: 17,
+        color: '#1c1c1c'
+    }
 });
 
 export default Pokemones;

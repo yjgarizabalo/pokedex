@@ -32,7 +32,7 @@ const Pokemones = ({navigation}) => {
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 {
-                    info.map(({ name }) => {
+                    info.map(({ name, url}) => {
 
                         return (
                             <View key={i} style={styles.item}>
@@ -43,9 +43,8 @@ const Pokemones = ({navigation}) => {
                                 <View style={{ flex: 1, justifyContent: 'center' }}>
                                     <Button style={styles.button}
                                         title="Detalle"
-                                        onPress={() => navigation.navigate('Detalle')}
+                                        onPress={() => navigation.navigate('Detalle', {url_pok: url})}
                                         color="#4169E1"
-                                        fontWeight="bold"
                                     />
                                 </View>
                             </View>

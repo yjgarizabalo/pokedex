@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, SafeAreaView, StatusBar, ScrollView, Button } f
 // COMPONETS
 import DetallePokemon from './DetallePokemon'
 
-const Pokemones = () => {
+const Pokemones = ({navigation}) => {
     const [info, setInfo] = useState([]);
 
     useEffect(() => {
@@ -28,14 +28,6 @@ const Pokemones = () => {
         }
     };
 
-    function DetalleScreen(name) {
-        console.log('loquesea');
-        return (
-            <DetallePokemon />
-        );
-    }
-
-
 
     let i = 0;
 
@@ -54,7 +46,7 @@ const Pokemones = () => {
                                 <View style={{ flex: 1, justifyContent: 'center' }}>
                                     <Button
                                         title="Detalle"
-                                        onPress={() => DetalleScreen(name)}
+                                        onPress={() => navigation.navigate('DetallePokemon')}
                                     />
                                 </View>
                             </View>

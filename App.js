@@ -7,6 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
 // VARIABLES
@@ -16,6 +17,7 @@ const Stack = createNativeStackNavigator();
 // COMPONENTES
 import Pokemones from './components/views/Pokemones'
 import SearchPokemon from './components/views/SearchPokemon'
+import DetallePokemon from './components/views/DetallePokemon'
 
 
 export default function App() {
@@ -30,13 +32,8 @@ export default function App() {
               <AntDesign name="aliwangwang-o1" size={24} color={color} />
             )
           }}
-        >
-          {() => (
-            <Stack.Navigator>
-              <Stack.Screen name="Pokemones" component={PokemonesScreen} />
-            </Stack.Navigator>
-          )}
-        </Tab.Screen>
+          component={DetalleStack}
+        />
 
         <Tab.Screen name="Search"
           options={{
@@ -44,15 +41,25 @@ export default function App() {
               <AntDesign name="search1" size={24} color={color} />
             )
           }}
-        >
-          {() => (
-            <Stack.Navigator>
-              <Stack.Screen name="Buscar Pokémon" component={SearchScreen} />
-            </Stack.Navigator>
-          )}
-        </Tab.Screen>
+          component={SearchScreen}
+        />
       </Tab.Navigator>
     </NavigationContainer>
+  );
+}
+
+
+
+const StackDetalle = createStackNavigator();
+
+function DetalleStack() {
+  return (
+
+    <StackDetalle.Navigator>
+      <StackDetalle.Screen name="Pokemones" component={Pokemones} />
+      <StackDetalle.Screen name="DetallePokemon" component={DetallePokemon} />
+    </StackDetalle.Navigator>
+
   );
 }
 

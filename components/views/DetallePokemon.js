@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,Image } from 'react-native';
 
 
 const DetallePokemon = ({ navigation, route }) => {
   const [info, setInfo] = useState([]);
+  const [nombrePok, setNombrePok] = useState();
+  const [imgPok, setImgPok] = useState([]);
 
 
   useEffect(() => {
@@ -21,6 +23,8 @@ const DetallePokemon = ({ navigation, route }) => {
       const response = await fetch(route.params.url_pok, options);
       const json = await response.json();
       setInfo(json.results)
+      setNombrePok(json.name.toUpperCase());
+      setImgPok(json.sprites.front_default);
       console.log(json);
     } catch (error) {
       console.log("error", error);
@@ -28,7 +32,8 @@ const DetallePokemon = ({ navigation, route }) => {
   }
   return (
     <View style={styles.container}>
-      <Text>Detalles pokemones</Text>
+      <Image source={{uri:`${imgPok}`}} style={styles.image}/>
+      <Text style={styles.name}>{nombrePok}</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -40,6 +45,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  name: {
+    fontSize: 17,
+    color: '#1c1c1c',
+  },
+  image: {
+    width: 200,
+    height: 200,
+    borderWidth: 2,
+    borderColor: "#c35547",
+    resizeMode: "contain",
   },
 });
 

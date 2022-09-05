@@ -19,7 +19,7 @@ const Pokemones = ({navigation}) => {
             const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=24&offset=0', options);
             const json = await response.json();
             setInfo(json.results)
-            console.log(json);
+            // console.log(json);
         } catch (error) {
             console.log("error", error);
         }
@@ -38,7 +38,7 @@ const Pokemones = ({navigation}) => {
                             <View key={i} style={styles.item}>
                                 <View style={{ flex: 1 }}>
                                     <Text style={styles.title}>Nombre</Text>
-                                    <Text key={i++} style={styles.name}>{name}</Text>
+                                    <Text key={i++} style={styles.name}>{name.toUpperCase()}</Text>
                                 </View>
                                 <View style={{ flex: 1, justifyContent: 'center' }}>
                                     <Button style={styles.button}

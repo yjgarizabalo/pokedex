@@ -17,13 +17,14 @@ const Stack = createNativeStackNavigator();
 import Pokemones from './components/views/Pokemones'
 import SearchPokemon from './components/views/SearchPokemon'
 
+
 export default function App() {
 
   return (
     <NavigationContainer>
       <Tab.Navigator labeled={false} bordered={true} barStyle={{ backgroundColor: '#FFD700', bottom: 25, marginLeft: 20, marginRight: 20 }}>
 
-        <Tab.Screen name="Home_"
+        <Tab.Screen name="ListaPokemones"
           options={{
             tabBarIcon: ({ color }) => (
               <AntDesign name="aliwangwang-o1" size={24} color={color} />
@@ -46,7 +47,7 @@ export default function App() {
         >
           {() => (
             <Stack.Navigator>
-              <Stack.Screen name="Buscar Pokémon" component={BlogScreen} />
+              <Stack.Screen name="Buscar Pokémon" component={SearchScreen} />
             </Stack.Navigator>
           )}
         </Tab.Screen>
@@ -63,11 +64,13 @@ function PokemonesScreen() {
   );
 }
 
-function BlogScreen() {
+function SearchScreen() {
   return (
     <SearchPokemon />
   );
 }
+
+
 
 const styles = StyleSheet.create({
   container: {

@@ -1,6 +1,9 @@
 // import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, StatusBar, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, StatusBar, ScrollView, Button } from 'react-native';
+
+// COMPONETS
+import DetallePokemon from './DetallePokemon'
 
 const Pokemones = () => {
     const [info, setInfo] = useState([]);
@@ -8,6 +11,8 @@ const Pokemones = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+
 
     const fetchData = async () => {
         const options = {
@@ -23,6 +28,17 @@ const Pokemones = () => {
         }
     };
 
+    function DetalleScreen(name) {
+        console.log('loquesea');
+        return (
+            <DetallePokemon />
+        );
+    }
+
+
+
+    let i = 0;
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
@@ -30,17 +46,29 @@ const Pokemones = () => {
                     info.map(({ name }) => {
 
                         return (
-                            <View style={styles.item}>
-                                <Text style={styles.title}>Nombre</Text>
-                                <Text  style={styles.name}>{name}</Text>
+                            <View key={i} style={styles.item}>
+                                <View style={{ flex: 1 }}>
+                                    <Text style={styles.title}>Nombre</Text>
+                                    <Text key={i++} style={styles.name}>{name}</Text>
+                                </View>
+                                <View style={{ flex: 1, justifyContent: 'center' }}>
+                                    <Button
+                                        title="Detalle"
+                                        onPress={() => DetalleScreen(name)}
+                                    />
+                                </View>
                             </View>
                         )
+
                     })
                 }
+
             </ScrollView>
         </SafeAreaView>
     );
 }
+
+
 
 const styles = StyleSheet.create({
     container: {
@@ -52,6 +80,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ececec',
         padding: 24,
         marginVertical: 8,
+        flexDirection: 'row',
     },
     title: {
         fontSize: 12,

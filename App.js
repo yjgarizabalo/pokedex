@@ -12,7 +12,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 // VARIABLES
 const Tab = createMaterialBottomTabNavigator();
-const Stack = createNativeStackNavigator();
+
 
 // COMPONENTES
 import Pokemones from './components/views/Pokemones'
@@ -41,7 +41,7 @@ export default function App() {
               <AntDesign name="search1" size={24} color={color} />
             )
           }}
-          component={SearchScreen}
+          component={SearchStack}
         />
       </Tab.Navigator>
     </NavigationContainer>
@@ -49,41 +49,25 @@ export default function App() {
 }
 
 
-
+//STACK
 const StackDetalle = createStackNavigator();
 
 function DetalleStack() {
   return (
-
     <StackDetalle.Navigator>
       <StackDetalle.Screen name="Pokemones" component={Pokemones} />
-      <StackDetalle.Screen name="DetallePokemon" component={DetallePokemon} />
+      <StackDetalle.Screen name="Detalle" component={DetallePokemon} />
     </StackDetalle.Navigator>
 
   );
 }
 
+const StackSearch = createNativeStackNavigator();
 
-//SCREENS
-function PokemonesScreen() {
+function SearchStack() {
   return (
-    <Pokemones />
+    <StackSearch.Navigator>
+      <StackSearch.Screen name='SearchPokemon' component={SearchPokemon}/>
+    </StackSearch.Navigator>
   );
 }
-
-function SearchScreen() {
-  return (
-    <SearchPokemon />
-  );
-}
-
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

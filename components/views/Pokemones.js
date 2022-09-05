@@ -41,14 +41,16 @@ const Pokemones = ({navigation}) => {
                                     <Text key={i++} style={styles.name}>{name}</Text>
                                 </View>
                                 <View style={{ flex: 1, justifyContent: 'center' }}>
-                                    <Button
+                                    <Button style={styles.button}
                                         title="Detalle"
-                                        onPress={() => navigation.navigate('DetallePokemon')}
+                                        onPress={() => navigation.navigate('Detalle')}
+                                        color="#4169E1"
+                                        fontWeight="bold"
                                     />
                                 </View>
                             </View>
                         )
-
+                        
                     })
                 }
 
@@ -78,7 +80,10 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 17,
-        color: '#1c1c1c'
+        color: '#1c1c1c',
+    },
+    button:  {
+        fontWeight: 'bold'
     }
 });
 

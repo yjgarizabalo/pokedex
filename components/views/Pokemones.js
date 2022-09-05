@@ -23,17 +23,16 @@ const Pokemones = () => {
         }
     };
 
-
-
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 {
                     info.map(({ name }) => {
+
                         return (
                             <View style={styles.item}>
                                 <Text style={styles.title}>Nombre</Text>
-                                <Text style={styles.name}>{name}</Text>
+                                <Text  style={styles.name}>{name}</Text>
                             </View>
                         )
                     })

@@ -2,9 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, StatusBar, ScrollView, Button } from 'react-native';
 
-// COMPONETS
-import DetallePokemon from './DetallePokemon'
-
 const Pokemones = ({navigation}) => {
     const [info, setInfo] = useState([]);
 

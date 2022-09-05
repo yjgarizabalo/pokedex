@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 // ICONS
 import { AntDesign } from '@expo/vector-icons';

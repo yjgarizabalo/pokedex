@@ -13,8 +13,6 @@ const DetallePokemon = ({ navigation, route }) => {
     fetchData();
   }, []);
 
-
-
   const fetchData = async () => {
     const options = {
       method: 'GET',
@@ -24,7 +22,7 @@ const DetallePokemon = ({ navigation, route }) => {
       const json = await response.json();
       setInfo(json.results)
       setNombrePok(json.name.toUpperCase());
-      setImgPok(json.sprites.front_default);
+      setImgPok(json.sprites);
       console.log(json);
     } catch (error) {
       console.log("error", error);
@@ -32,7 +30,7 @@ const DetallePokemon = ({ navigation, route }) => {
   }
   return (
     <View style={styles.container}>
-      <Image source={{uri:`${imgPok}`}} style={styles.image}/>
+      <Image style={styles.image} source={{uri: imgPok.front_default}} />
       <Text style={styles.name}>{nombrePok}</Text>
       <StatusBar style="auto" />
     </View>
@@ -53,8 +51,6 @@ const styles = StyleSheet.create({
   image: {
     width: 200,
     height: 200,
-    borderWidth: 2,
-    borderColor: "#c35547",
     resizeMode: "contain",
   },
 });

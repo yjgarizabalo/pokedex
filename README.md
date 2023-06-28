@@ -1,4 +1,4 @@
-# Pokeseach
+# Pokedex
 
 Encuentra información detallada de tu pokómon
 

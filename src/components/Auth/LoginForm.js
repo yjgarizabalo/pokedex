@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import {
   StyleSheet,
   View,
@@ -10,10 +10,12 @@ import {
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { user, userDetails } from '../../utils/userDB'
+import useAuth from '../../hook/UseAuth'
 
 export default function LoginForm() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("")
+  const { login } = useAuth()
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -22,12 +24,12 @@ export default function LoginForm() {
     onSubmit: (formValue) => {
       console.log("Formulario enviado...");
       console.log(formValue);
-      const {username, password} = formValue;
+      setError("")
+      const { username, password } = formValue;
       if (username !== user.username || password !== user.password) {
         setError("El usuario o la contraseña no son correcto");
       } else {
-        console.log("Login correcto");
-        console.log(userDetails);
+        login(userDetails)
         setSuccess("Login correcto")
         setError("")
       }
